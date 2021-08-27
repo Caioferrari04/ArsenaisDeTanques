@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Atualizar compra";
+}
+@model Compra
+
+<div class="row justify-content-center">
+    <form class="col-md-5" asp-action="Update">
+        <div class="row">
+            <div class="form-group">
+                <span class="text-danger" asp-validation-for="DataCompra"></span>
+                <label asp-for="DataCompra" class="control-label"></label>
+                <input asp-for="DataCompra" class="form-control" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group mr-md-5">
+                <span class="text-danger" asp-validation-for="PrecoCompra"></span>
+                <label asp-for="PrecoCompra" class="control-label"></label>
+                <input asp-for="PrecoCompra" class="form-control" />
+            </div>
+            <div class="form-group">
+                <span class="text-danger" asp-validation-for="tanqueId"></span>
+                <label asp-for="tanqueId" class="control-label"></label>
+                <select asp-for="tanqueId" class="form-control" asp-items="ViewBag.Tanques">
+                    <option value="">Selecione....</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <input class="btn btn-success" type="submit" value="Atualizar!" />
+            <a class="btn btn-info" asp-action="Index">Voltar!</a>
+        </div>
+    </form>
+</div>
+

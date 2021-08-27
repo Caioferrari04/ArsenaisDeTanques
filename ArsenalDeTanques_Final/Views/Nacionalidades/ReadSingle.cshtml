@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Ver nação";
+}
+@model Nacionalidade
+
+<p><img src="@Html.DisplayFor(Model => Model.linkBandeira)" width="200" height="120" /></p>
+<hr />
+
+<p><b>ID</b>: @Html.DisplayFor(Model => Model.Id)</p>
+<p><b>Nome</b>: @Html.DisplayFor(Model => Model.Nome)</p>
+
+<hr />
+
+@if (Model.tanques.Count > 0)
+{
+    <h2>Tanques dessa nação:</h2>
+    @foreach (Tanque tanque in Model.tanques)
+    {
+        <div class="card mb-3" style="max-width: 600px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <a asp-controller="Tanques" asp-action="ReadSingle" asp-route-id="@tanque.Id"><img src="@Html.DisplayFor(Model => tanque.LinkImagem)" class="img-fluid rounded-start" style="min-width: 220px;min-height:160px;" alt="@Html.DisplayFor(Model => tanque.Nome)"></a>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(Model => tanque.Nome)</h5>
+                        <p class="card-text">
+                            Esse tanque possuí um canhão de
+                            @Html.DisplayFor(Model => tanque.Calibre) mm e um motor de @Html.DisplayFor(Model => tanque.PotenciaMotor) cavalos.
+                            @Html.DisplayFor(Model => tanque.Nome) foi fabricado em @Html.DisplayFor(Model => tanque.DataFabricacao).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+<hr />
+
+<div class="row">
+    <a class="btn btn-primary" asp-action="Update" asp-route-id="@Model.Id">Atualizar informações</a>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" style="margin-left: 1vh;">Deletar nacionalidade (Usando modal)</button>
+    <a class="btn btn-primary" asp-action="Delete" asp-route-id="@Model.Id" style="margin-left: 1vh;">Deletar nacionalidade (Usando rota adicional)</a>
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">CONFIRMAR DELEÇÃO</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ATENÇÃO! VOCÊ ESTÁ PRESTES A DELETAR UM REGISTRO, TEM CERTEZA DO QUE ESTÁ FAZENDO?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <a class="btn btn-primary" asp-action="ConfirmarDelete" asp-route-id="@Model.Id">Confirmar deleção</a>
+            </div>
+        </div>
+    </div>
+</div>

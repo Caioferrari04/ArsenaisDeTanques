@@ -1,0 +1,160 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@{
+    ViewData["Title"] = "Tanques";
+}
+@model List<Tanque>
+
+<h1>Nossos produtos</h1>
+<form class="row">
+    <div class="col col-md-6">
+        <input type="text" class="form-control" name="busca" placeholder="Buscar tanque..." />
+    </div>
+    <div class="col col-md-1">
+        <button type="submit" class="btn btn-outline-dark">Buscar</button>
+    </div>
+    <select name="servico" class="btn btn-outline-dark">
+        <option value="sql">SQL</option>
+        <option value="static">Estático</option>
+        <option value="hibrido">Hibrido</option>
+    </select>
+</form>
+<div class="row">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        @if (ViewBag.servico.Contains("sql"))
+        {
+            <a class="btn btn-dark" asp-action="Criar" style="margin:2vh;">Criar novo tanque!</a>
+        }
+        else
+        {
+            <button class="btn btn-dark" style="margin:2vh; color:black;" disabled>Criar novo tanque!</button>
+        }
+    }
+    @if (ViewBag.operacaoRealizada == "")
+    {
+        @if (ViewBag.ordenar)
+        {
+            <a class="btn btn-outline-dark" href="?servico=@ViewBag.servico no" style="margin:2vh;">Desordenar tanques</a>
+        }
+        else
+        {
+            <a href="?servico=@ViewBag.servico ord geral" class="btn btn-outline-dark" value="Ordenar tanques" style="margin:2vh;">Ordenar tanques</a>
+        }
+    }
+    else
+    {
+        <a asp-action="Index" asp-route-servico="sql ord geral" class="btn btn-outline-dark" value="Ordenar compras" style="margin:2vh;">Ordenar compras</a>
+    }
+    @if (ViewBag.servico.Contains("sql"))
+    {
+        @if (!ViewBag.ordenar)
+        {
+            <form asp-action="Index">
+                <div class="form-row flex-nowrap col-md-12">
+                    <select name="servico" class="form-control" style="margin:2vh;">
+                        <option value="sql ord geral">Tipo...</option>
+                        @foreach (TipoTanque tipo in ViewBag.tipos)
+                        {
+                            <option value="sql ord tipo @tipo.NomeTipo">@tipo.NomeTipo</option>
+                        }
+                    </select>
+                    <button type="submit" class="btn btn-outline-dark col-md-5" style="margin-top:2vh; margin-bottom: 2vh; margin-left: 2vh;">Filtrar tipos</button>
+                </div>
+            </form>
+            <form asp-action="Index">
+                <div class="form-row flex-nowrap col-md-12">
+                    <select name="servico" class="form-control" style="margin:2vh;">
+                        <option value="sql ord geral">Nação...</option>
+                        @foreach (Nacionalidade nacao in ViewBag.nacoes)
+                        {
+                            <option value="sql ord nacao @nacao.Nome">@nacao.Nome</option>
+                        }
+                    </select>
+                    <button type="submit" class="btn btn-outline-dark col-md-5" style="margin-top: 2vh; margin-bottom: 2vh; margin-left: 2vh;">Filtrar nações</button>
+                </div>
+            </form>
+        }
+    }
+</div>
+<hr />
+
+@if (ViewBag.operacaoRealizada == "create")
+{
+    <h3>Tanque cadastrado com sucesso.</h3>
+}
+else if (ViewBag.operacaoRealizada == "update")
+{
+    <h3>Tanque atualizado com sucesso.</h3>
+}
+else if (ViewBag.operacaoRealizada == "delete")
+{
+    <h3>Tanque deletado com sucesso.</h3>
+}
+
+<p>É necessário @ViewBag.totalTripulacao tanquistas para operar @Model.Count() tanques.</p>
+<p>O tanque mais novo é @ViewBag.tanqueRecente.</p>
+<p>O tanque com o motor mais potente é @ViewBag.maiorMotor.</p>
+<p>O tanque mais caro é @ViewBag.maisCaro.</p>
+
+<div class="row row-cols-1 row-cols-md-2 g-4">
+    @foreach (Tanque tanque in Model)
+    {
+        <div class="col col-md-4">
+            <div class="card" style="margin-bottom: 2vh; max-width:320px;">
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    @if (ViewBag.servico.Contains("sql"))
+                    {
+                        <a asp-action="ReadSingle" asp-route-id="@tanque.Id"><img src="@tanque.LinkImagem" class="img-fluid rounded-top" style="min-width: 318px;max-height:180px;" alt="@tanque.Nome"></a>
+                    }
+                    else
+                    {
+                        <img src="@tanque.LinkImagem" class="img-fluid rounded-top" style="min-width: 318px;max-height:180px;" alt="@tanque.Nome">
+                    }
+                }
+                else
+                {
+                    <img src="@tanque.LinkImagem" class="img-fluid rounded-top" style="min-width: 318px;max-height:180px;" alt="@tanque.Nome">
+                }
+            <div class="card-body">
+                <h5 class="card-title">
+                    <a asp-controller="Nacionalidades" asp-action="ReadSingle" asp-route-id="@tanque.nacionalidadeId">
+                        <img src="@tanque.nacionalidade.linkBandeira" style="width:60px;height:30px;" />
+                    </a>
+                    <a asp-controller="Tipos" asp-action="Details" asp-route-id="@tanque.tipoId">
+                        <img src="@tanque.tipo.LinkImagem" style="width:60px;height:30px;" />
+                    </a>
+                    @tanque.Nome
+                </h5>
+                <p class="card-text">
+                    @tanque.Nome, esse tanque possuí um canhão de
+                    @tanque.Calibre mm e um motor de @tanque.PotenciaMotor cavalos.
+                    @tanque.Nome foi fabricado em @Html.DisplayFor(Model => tanque.DataFabricacao).
+                </p>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    @foreach (Compra compra in ViewBag.comprado)
+                    {
+                        @if (tanque.Id == compra.tanque.Id)
+                        {
+                            <p class="card-text text-success">Já possuí</p>
+                        }
+                    }
+                }
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    @if (ViewBag.servico == "sql")
+                    {
+                        <a class="btn btn-dark" asp-action="ReadSingle" asp-route-id="@tanque.Id">Ver mais</a>
+                    }
+                    else
+                    {
+                        <button class="btn btn-dark" disabled>Ver mais</button>
+                    }
+                }
+            </div>
+            </div>
+        </div>
+    }
+</div>

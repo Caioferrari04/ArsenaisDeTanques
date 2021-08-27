@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "Criar nacionalidade";
+}
+@model Nacionalidade
+
+<div class="text-center">
+    <h2 class="display-4">Tem certeza que deseja deletar @Html.DisplayFor(Model => Model.Nome)?</h2>
+    <a class="btn btn-primary" asp-action="ConfirmarDelete" asp-route-id="@Model.Id">Confirmar deleção</a>
+    <a class="btn btn-primary" asp-action="ReadSingle" asp-route-id="@Model.Id">Cancelar deleção</a>
+</div>

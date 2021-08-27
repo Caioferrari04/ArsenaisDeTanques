@@ -1,0 +1,68 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@{
+    ViewData["Title"] = "Nações";
+}
+
+@model List<Nacionalidade>
+
+<h1>Nacionalidades de tanques</h1>
+<hr />
+<form class="row">
+    <div class="col col-md-6">
+        <input type="text" class="form-control" name="busca" placeholder="Buscar nacionalidade..." />
+    </div>
+    <div class="col col-md-1">
+        <button type="submit" class="btn btn-outline-dark">Buscar</button>
+    </div>
+</form>
+<div class="row">
+    @if (SignInManager.IsSignedIn(User)) 
+    { 
+        <a class="btn btn-dark" asp-action="Criar" style="margin:2vh;">Criar nova nacionalidade!</a>
+    }
+    @if (ViewBag.operacaoRealizada == "")
+    {
+        @if (ViewBag.ordenar)
+        {
+            <a class="btn btn-outline-dark" asp-action="Index" style="margin:2vh;">Desordenar nacionalidades</a>
+        }
+        else
+        {
+            <a class="btn btn-outline-dark" href="?ord=true" value="Ordenar tanques" style="margin:2vh;">Ordenar nacionalidades</a>
+        }
+    }
+    else
+    {
+        <a class="btn btn-outline-dark" asp-action="Index" asp-route-ord="true" value="Ordenar tanques" style="margin:2vh;">Ordenar nacionalidades</a>
+    }
+</div>
+@if (ViewBag.operacaoRealizada == "create")
+{
+    <h1>Nacionalidade cadastrada com sucesso.</h1>
+}
+@if (ViewBag.operacaoRealizada == "update")
+{
+    <h1>Nacionalidade atualizada com sucesso.</h1>
+}
+@if (ViewBag.operacaoRealizada == "delete")
+{
+    <h1>Nacionalidade deletada com sucesso.</h1>
+}
+
+<div class="d-flex flex-wrap">
+
+    @foreach (Nacionalidade nacionalidade in Model)
+    {
+        <div class="card" style="width: 18rem; margin: 0.5rem;">
+            <div class="card-body">
+                <img src="@nacionalidade.linkBandeira" width="200" height="120" />
+                <h5 class="card-title">@nacionalidade.Nome</h5>
+                @if (SignInManager.IsSignedIn(User)) 
+                { 
+                    <a class="btn btn-dark" asp-action="ReadSingle" asp-route-id="@nacionalidade.Id">Ver mais</a>
+                }
+            </div>
+        </div>
+    }
+</div>

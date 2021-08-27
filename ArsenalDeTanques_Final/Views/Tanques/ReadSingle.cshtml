@@ -1,0 +1,48 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@{
+    ViewData["Title"] = "Ver tanque";
+}
+@model Tanque
+
+<h1>Vendo tanque @Html.DisplayFor(Model => Model.Id)</h1>
+
+<hr />
+
+<p><img src="@Html.DisplayFor(Model => Model.LinkImagem)" width="350" height="200" alt="@Html.DisplayFor(Model => Model.Nome)" /></p>
+<p><b>@Html.DisplayNameFor(Model => Model.Nome)</b>: @Html.DisplayFor(Model => Model.Nome)</p>
+<p><b>@Html.DisplayNameFor(Model => Model.Calibre)</b>: @Html.DisplayFor(Model => Model.Calibre)mm</p>
+<p><b>@Html.DisplayNameFor(Model => Model.PotenciaMotor)</b>: @Html.DisplayFor(Model => Model.PotenciaMotor)hp</p>
+<p><b>@Html.DisplayNameFor(Model => Model.QuantidadeTripulacao)</b>: @Html.DisplayFor(Model => Model.QuantidadeTripulacao) tripulantes</p>
+<p><b>@Html.DisplayNameFor(Model => Model.DataFabricacao)</b>: @Html.DisplayFor(Model => Model.DataFabricacao)</p>
+<p><b>@Html.DisplayNameFor(Model => Model.Velocidade)</b>: @Html.DisplayFor(Model => Model.Velocidade) km/h</p>
+<p><b>@Html.DisplayNameFor(Model => Model.nacionalidade.Nome)</b>: @Html.DisplayFor(Model => Model.nacionalidade.Nome)</p>
+<p><b>@Html.DisplayNameFor(Model => Model.PrecoCompra)</b>: $@Html.DisplayFor(Model => Model.PrecoCompra)</p>
+<p><b>@Html.DisplayNameFor(Model => Model.tipo.NomeTipo)</b>: @Html.DisplayFor(Model => Model.tipo.NomeTipo)</p>
+
+<div class="row">
+    <a class="btn btn-dark" asp-action="Update" asp-route-id="@Model.Id">Atualizar informações</a>
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter" style="margin-left: 1vh;">Deletar tanque (Usando modal)</button>
+    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.Id" style="margin-left: 1vh;">Deletar tanque (Usando rota adicional)</a>
+    <a class="btn btn-success" asp-controller="Comprados" asp-action="Criar" asp-route-id="@Model.Id" style="margin-left: 1vh;">Comprar tanque</a>
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">CONFIRMAR DELEÇÃO</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ATENÇÃO! VOCÊ ESTÁ PRESTES A DELETAR UM REGISTRO, TEM CERTEZA DO QUE ESTÁ FAZENDO?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <a class="btn btn-primary" asp-action="ConfirmarDelete" asp-route-id="@Model.Id">Confirmar deleção</a>
+            </div>
+        </div>
+    </div>
+</div>

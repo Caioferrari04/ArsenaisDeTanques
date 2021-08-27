@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Página inicial";
+}
+@model List<Tanque>
+ 
+
+<h1 class="text-center">Tanques em destaque</h1>
+<div class="slideshow-container" style="max-width: 500px; max-height: 300px;"> 
+    @foreach(Tanque tanque in Model) {
+        <a asp-controller="Tanques" asp-action="ReadSingle" asp-route-id="@tanque.Id">
+            <div class="mySlides">
+                <img src="@Html.DisplayFor(Model => tanque.LinkImagem)" style="max-width: 500px; max-height: 300px; min-width: 500px; min-height: 300px;">
+                <div class="text" style="font-size: 32px;">@Html.DisplayFor(Model => tanque.Nome)</div>
+            </div>
+        </a>
+    }
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+</div>
+<br>
+
+
+<div style="text-align:center">
+    @for(int i = 1; i <= Model.Count; i++) { 
+        <span class="dot" onclick="currentSlide(@i)"></span>
+    }
+</div>
+<p class="text-center">Os tanques em destaques são definidos por cliques! Tente clicar algumas vezes em alguns tanques os veja</p>
+<p class="text-center">aparecendo aqui!</p>
+
+

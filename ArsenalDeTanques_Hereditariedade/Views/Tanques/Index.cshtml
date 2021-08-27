@@ -1,0 +1,58 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<Tanque>
+
+<h1>Nossos produtos</h1>
+<form class="row">
+    <div class="col col-md-6">
+        <input type="text" class="form-control" name="busca" placeholder="Buscar tanque..." />
+    </div>
+    <div class="col col-md-1">
+        <button type="submit" class="btn btn-outline-dark">Buscar</button>
+    </div>
+</form>
+<div class="row">
+
+    <a class="btn btn-dark" asp-area="" asp-controller="Tanques" asp-action="Criar" style="margin:2vh;">Criar novo tanque!</a>
+    @if (ViewBag.ordenar) { 
+        <a class="btn btn-outline-dark" asp-area="" asp-controller="Tanques" asp-action="Index" style="margin:2vh;">Desordenar tanques</a>
+    }
+    else {
+        <form asp-action="Index">
+            <button type="submit" class="btn btn-outline-dark" value="Ordenar tanques" style="margin:2vh;">Ordenar tanques</button>
+        </form>
+    } 
+</div>
+@if (ViewBag.itemCriado)
+{
+    <h1>Item criado com sucesso! Woooho!</h1>
+}
+@if (ViewBag.itemDeletado)
+{
+    <h1>Item deletado com sucesso.</h1>
+}
+<p>É necessário @ViewBag.totalTripulacao tanquistas para operar @Model.Count() tanques.</p>
+<p>O tanque mais novo é @ViewBag.tanqueRecente.</p>
+<p>O tanque com o motor mais potente é @ViewBag.maiorMotor.</p>
+
+<div class="d-flex flex-wrap">
+
+    @foreach (Tanque tanque in Model)
+    {
+        <div class="card" style="width: 18rem; margin: 0.5rem;">
+            <div class="card-body">
+                <h5 class="card-title">Tanque @Html.DisplayFor(Model => tanque.Id): @Html.DisplayFor(Model => tanque.Nome)</h5>
+                <p class="card-text">
+                    @Html.DisplayFor(Model => tanque.Nome), esse tanque possuí um canhão de
+                    @Html.DisplayFor(Model => tanque.Calibre) mm e um motor de @Html.DisplayFor(Model => tanque.PotenciaMotor) cavalos.
+                    @Html.DisplayFor(Model => tanque.Nome) foi fabricado em @Html.DisplayFor(Model => tanque.DataFabricacao).
+                </p>
+                <a class="btn btn-primary" asp-controller="ReadSingle" asp-action="LerUm" asp-route-id="@tanque.Id">Ver mais</a>
+            </div>
+        </div>
+    }
+</div>

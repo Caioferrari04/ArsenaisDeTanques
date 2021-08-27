@@ -1,0 +1,12 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Tanque
+
+<div class="text-center">
+    <h1 class="display-4">Tem certeza que deseja deletar @Html.DisplayFor(Model => Model.Nome)?</h1>
+    <a class="btn btn-primary" asp-controller="Tanques" asp-action="ConfirmarDelete" asp-route-id="@Model.Id">Confirmar deleção</a>
+    <a class="btn btn-primary" asp-controller="ReadSingle" asp-action="LerUm" asp-route-id="@Model.Id">Cancelar deleção</a>
+</div>

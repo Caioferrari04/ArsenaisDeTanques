@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "Cancelar compra";
+}
+@model Compra
+
+<div class="text-center">
+    <h1 class="display-4">Tem certeza que deseja cancelar a compra realizada em @Html.DisplayFor(Model => Model.DataCompra)?</h1>
+    <a class="btn btn-primary" asp-action="ConfirmarDelete" asp-route-id="@Model.id">Confirmar</a>
+    <a class="btn btn-primary" asp-action="ReadSingle" asp-route-id="@Model.id">Voltar</a>
+</div>

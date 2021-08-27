@@ -1,0 +1,52 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model TanqueAnfibio
+
+<div class="row">
+    <form class="col-md-4" asp-action="UpdateAnfibio">
+        <div class="form-group">
+            <label asp-for="Id" class="control-label"></label>
+            <input asp-for="Id" class="form-control" readonly/>
+        </div>
+        <div class="form-group">
+            <label asp-for="Nome" class="control-label"></label>
+            <input asp-for="Nome" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Calibre" class="control-label"></label>
+            <input asp-for="Calibre" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="PotenciaMotor" class="control-label"></label>
+            <input asp-for="PotenciaMotor" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="QuantidadeTripulacao" class="control-label"></label>
+            <input asp-for="QuantidadeTripulacao" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="DataFabricacao" class="control-label"></label>
+            <input asp-for="DataFabricacao" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Velocidade" class="control-label"></label>
+            <input asp-for="Velocidade" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="VelocidadeAquatica" class="control-label"></label>
+            <input asp-for="VelocidadeAquatica" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="CapacidadeTransporte" class="control-label"></label>
+            <input asp-for="CapacidadeTransporte" class="form-control" />
+        </div>
+        <div class="form-group">
+            <input class="btn btn-success" type="submit" value="Atualizar!" />
+            <a class="btn btn-info" asp-controller="Tanques" asp-action="Index">Voltar!</a>
+        </div>
+    </form>
+</div>
+

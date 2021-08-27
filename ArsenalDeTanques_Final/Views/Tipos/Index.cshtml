@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ArsenalDeTanques.Models.TipoTanque>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@{
+    ViewData["Title"] = "Tipos";
+}
+
+<h1>Tipos de tanques</h1>
+
+<p>
+    @if (SignInManager.IsSignedIn(User)) {
+        <a class="btn btn-danger" asp-action="Create">Criar novo</a>
+    }
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeTipo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LinkImagem)
+            </th>
+            <th>
+                Ações
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeTipo)
+                </td>
+                <td>
+                    <img src="@Html.DisplayFor(modelItem => item.LinkImagem)" style="width:60px;height:30px;" />
+                </td>
+                <td>
+                    @if (SignInManager.IsSignedIn(User)) { 
+                        <a class="btn btn-outline-dark" asp-action="Edit" asp-route-id="@item.id">Editar</a> 
+                        <a class="btn btn-outline-dark" asp-action="Details" asp-route-id="@item.id">Detalhes</a> 
+                        <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.id">Deletar</a>
+                    }
+                    else
+                    {
+                        <b>Logue para usar!</b>
+                    }
+                </td>
+            </tr>
+    }
+    </tbody>
+</table>

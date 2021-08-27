@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "Comprar";
+}
+@model Tanque
+
+<div class="text-center">
+    <h1 class="display-4">Tem certeza que deseja comprar @Html.DisplayFor(Model => Model.Nome)?</h1>
+    <a class="btn btn-primary" asp-action="ConfirmarCriar" asp-route-id="@Model.Id">Confirmar compra</a>
+    <a class="btn btn-primary" asp-controller="Tanques" asp-action="ReadSingle" asp-route-id="@Model.Id">Cancelar compra</a>
+</div>
+

@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Ver compra";
+}
+@model Compra
+
+<h1>Vendo compra @Html.DisplayFor(Model => Model.id)</h1>
+
+<p><b>@Html.DisplayNameFor(Model => Model.id)</b>: @Html.DisplayFor(Model => Model.id)</p>
+<p><b>@Html.DisplayNameFor(Model => Model.PrecoCompra)</b>: $@Html.DisplayFor(Model => Model.PrecoCompra)</p>
+<p><b>Tanque comprado</b>: @Html.DisplayFor(Model => Model.tanque.Nome)</p>
+<p><b>Nacionalidade</b>: @Html.DisplayFor(Model => Model.tanque.nacionalidade.Nome)</p>
+
+<div class="row">
+    <a class="btn btn-primary" asp-action="Update" asp-route-id="@Model.id">Atualizar informações</a>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" style="margin-left: 1vh;">Deletar compra (Usando modal)</button>
+    <a class="btn btn-primary" asp-action="Delete" asp-route-id="@Model.id" style="margin-left: 1vh;">Deletar compra (Usando rota adicional)</a>
+    <a class="btn btn-primary" asp-controller="Tanques" asp-action="ReadSingle" asp-route-id="@Model.tanque.Id" style="margin-left: 1vh;">Ver tanque</a>
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">CONFIRMAR DELEÇÃO</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ATENÇÃO! VOCÊ ESTÁ PRESTES A DELETAR UM REGISTRO, TEM CERTEZA DO QUE ESTÁ FAZENDO?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <a class="btn btn-primary" asp-action="ConfirmarDelete" asp-route-id="@Model.id">Confirmar deleção</a>
+            </div>
+        </div>
+    </div>
+</div>

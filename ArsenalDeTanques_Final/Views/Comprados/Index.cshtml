@@ -1,0 +1,58 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@{
+    ViewData["Title"] = "Compras";
+}
+@model List<Compra>
+
+<h1>Suas compras</h1>
+<form class="row">
+    <div class="col col-md-6">
+        <input type="text" class="form-control" name="busca" placeholder="Buscar compra..." />
+    </div>
+    <div class="col col-md-1">
+        <button type="submit" class="btn btn-outline-dark">Buscar</button>
+    </div>
+</form>
+<div class="row">
+    @if (ViewBag.operacaoRealizada == "")
+    {
+        @if (ViewBag.ordenar)
+        {
+            <a class="btn btn-outline-dark" href="?ord=false" style="margin:2vh;">Desordenar compras</a>
+        }
+        else
+        {
+            <a href="?ord=true" class="btn btn-outline-dark" value="Ordenar compras" style="margin:2vh;">Ordenar compras</a>
+        }
+    }
+    else
+    {
+        <a asp-action="Index" asp-route-ord="true" class="btn btn-outline-dark" value="Ordenar compras" style="margin:2vh;">Ordenar compras</a>
+    }
+</div>
+
+@if (ViewBag.operacaoRealizada == "create")
+{
+    <h3>Tanque comprado com sucesso.</h3>
+}
+else if (ViewBag.operacaoRealizada == "update")
+{
+    <h3>Registro de compra atualizado com sucesso.</h3>
+}
+else if (ViewBag.operacaoRealizada == "delete")
+{
+    <h3>Compra cancelada com sucesso.</h3>
+}
+
+<p>Você já investiu $@ViewBag.investido em nossa loja!</p>
+
+<div class="list-group">
+    @foreach (Compra comprado in Model)
+    {
+    <a class="list-group-item list-group-item-action" asp-action="ReadSingle" asp-route-id="@comprado.id">
+        @Html.DisplayFor(Model => comprado.DataCompra) - @comprado.tanque.Nome - <img src="@comprado.tanque.nacionalidade.linkBandeira" style="width:60px;height:30px;" /> -
+        <img src="@comprado.tanque.tipo.LinkImagem" style="width:60px;height:30px;" />
+    </a>
+    }
+</div>

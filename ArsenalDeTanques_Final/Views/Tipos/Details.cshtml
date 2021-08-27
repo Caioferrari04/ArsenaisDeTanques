@@ -1,0 +1,55 @@
+﻿@model TipoTanque
+
+@{
+    ViewData["Title"] = "Detalhes";
+}
+
+<h1>Detalhes</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NomeTipo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NomeTipo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LinkImagem)
+        </dt>
+        <dd class="col-sm-10">
+            <img src="@Html.DisplayFor(model => model.LinkImagem)" style="width:60px;height:30px;" />
+        </dd>
+    </dl>
+</div>
+
+@if (Model.tanques.Count > 0)
+{
+    <h2>Tanques desse tipo:</h2>
+    @foreach (Tanque tanque in Model.tanques)
+    {
+        <div class="card mb-3" style="max-width: 600px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <a asp-controller="Tanques" asp-action="ReadSingle" asp-route-id="@tanque.Id"><img src="@Html.DisplayFor(Model => tanque.LinkImagem)" class="img-fluid rounded-start" style="min-width: 220px;min-height:160px;" alt="@Html.DisplayFor(Model => tanque.Nome)"></a>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(Model => tanque.Nome)</h5>
+                        <p class="card-text">
+                            Esse tanque possuí um canhão de
+                            @Html.DisplayFor(Model => tanque.Calibre) mm e um motor de @Html.DisplayFor(Model => tanque.PotenciaMotor) cavalos.
+                            @Html.DisplayFor(Model => tanque.Nome) foi fabricado em @Html.DisplayFor(Model => tanque.DataFabricacao).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+<div>
+    <a class="btn btn-outline-dark" asp-action="Edit" asp-route-id="@Model.id">Editar</a> |
+    <a class="btn btn-outline-dark" asp-action="Index">Voltar para lista</a>
+</div>

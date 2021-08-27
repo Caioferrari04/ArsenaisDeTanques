@@ -1,0 +1,54 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model TanquePesado
+
+@if (ViewBag.itemAtualizado)
+{
+    <h1>Item atualizado com sucesso! Woooho!</h1>
+}
+@if (ViewBag.itemCriado)
+{
+    <h1>Item criado com sucesso! Wooho!</h1>
+    <h5>
+        NENHUM DOS BOTÕES ABAIXO IRÃO FUNCIONAR SE VOCÊ ESTIVER VENDO ISSO! Por conta da criação ser local,
+        haverá erros ao tentar deletar/atualizar.
+    </h5>
+}
+<!--Tanques pesados-->
+<p>@Html.DisplayNameFor(Model => Model.Id): @Html.DisplayFor(Model => Model.Id)</p>
+<p>@Html.DisplayNameFor(Model => Model.Nome): @Html.DisplayFor(Model => Model.Nome)<p>
+<p>@Html.DisplayNameFor(Model => Model.Calibre): @Html.DisplayFor(Model => Model.Calibre) mm</p>
+<p>@Html.DisplayNameFor(Model => Model.PotenciaMotor): @Html.DisplayFor(Model => Model.PotenciaMotor) hp</p>
+<p>@Html.DisplayNameFor(Model => Model.QuantidadeTripulacao): @Html.DisplayFor(Model => Model.QuantidadeTripulacao) tripulantes</p>
+<p>@Html.DisplayNameFor(Model => Model.DataFabricacao): @Html.DisplayFor(Model => Model.DataFabricacao)</p>
+<p>@Html.DisplayNameFor(Model => Model.Velocidade): @Html.DisplayFor(Model => Model.Velocidade) km/h</p>
+<p>@Html.DisplayNameFor(Model => Model.VelocidadeMaxima): @Html.DisplayFor(Model => Model.VelocidadeMaxima) km/h </p>
+
+<div class="row">
+    <a class="btn btn-primary" asp-controller="ReadSingle" asp-action="UpdateOne" asp-route-id="@Model.Id">Atualizar informações</a>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" style="margin-left: 1vh;">Deletar tanque (Usando modal)</button>
+    <a class="btn btn-primary" asp-controller="Tanques" asp-action="Delete" asp-route-id="@Model.Id" style="margin-left: 1vh;">Deletar tanque (Usando rota adicional)</a>
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">CONFIRMAR DELEÇÃO</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ATENÇÃO! VOCÊ ESTÁ PRESTES A DELETAR UM REGISTRO, TEM CERTEZA DO QUE ESTÁ FAZENDO?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <a class="btn btn-primary" asp-controller="Tanques" asp-action="ConfirmarDelete" asp-route-id="@Model.Id">Confirmar deleção</a>
+            </div>
+        </div>
+    </div>
+</div>
