@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zZzWeShWNNiq/wXQcvWHCS6JWOjc8e9P8BaiE1ZVxv/KXfvuQtBePXVgXEiJHef+Yf8GJm26PAJygSUteTnMPA==",
+  "dgSpecHash": "eg/Q2nVfF+2boscv6REzoYXDMI8BIorE8QDtIt5RK/OIrnyrQLz+maOJuOh3k8j22+GPzurYsXJy4R2ps1PYSA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\caio\\source\\repos\\ArsenalDeTanques\\ArsenalDeTanques.csproj",
+  "projectFilePath": "C:\\Users\\caio\\Desktop\\ArsenaisDeTanques\\ArsenalDeTanques_Final\\ArsenalDeTanques.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\caio\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\caio\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",

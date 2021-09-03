@@ -8310,11 +8310,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\caio\\source\\repos\\ArsenalDeTanques\\ArsenalDeTanques.csproj",
+      "projectUniqueName": "C:\\Users\\caio\\Desktop\\ArsenaisDeTanques\\ArsenalDeTanques_Final\\ArsenalDeTanques.csproj",
       "projectName": "ArsenalDeTanques",
-      "projectPath": "C:\\Users\\caio\\source\\repos\\ArsenalDeTanques\\ArsenalDeTanques.csproj",
+      "projectPath": "C:\\Users\\caio\\Desktop\\ArsenaisDeTanques\\ArsenalDeTanques_Final\\ArsenalDeTanques.csproj",
       "packagesPath": "C:\\Users\\caio\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\caio\\source\\repos\\ArsenalDeTanques\\obj\\",
+      "outputPath": "C:\\Users\\caio\\Desktop\\ArsenaisDeTanques\\ArsenalDeTanques_Final\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
